@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Waits {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Pritam Paul\\Downloads\\demo1\\MethodsofSelect\\" +
                 "src\\driver\\chromedriver.exe");
@@ -20,19 +20,23 @@ public class Waits {
 
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
-        driver.get("https://www.facebook.com/");
+        driver.get("https://en-gb.facebook.com/");
 
-        WebElement firstName = driver.findElement(By.name("firstname"));
-        WebElement lastname = driver.findElement(By.name("lastname"));
-        WebElement phone = driver.findElement(By.name("reg_email__"));
-        WebElement password = driver.findElement(By.name("reg_passwd__"));
+        driver.findElement(By.xpath("//a[contains(text(),'Create New Account')]")).click();
 
+        WebElement firstName = driver.findElement(By.xpath("//input[@name='firstname']"));
+//        WebElement lastname = driver.findElement(By.name("lastname"));
+//        WebElement phone = driver.findElement(By.name("reg_email__"));
+//        WebElement password = driver.findElement(By.name("reg_passwd__"));
+
+        Thread.sleep(3000);
         WebDriverWait wait = new WebDriverWait(driver,20);
-        wait.until(ExpectedConditions.visibilityOf(firstName));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='firstname']")));
 
 //        sendKeys(driver,firstName,20,"Sam");
 //        sendKeys(driver,lastname,20,"Smith");
 
+        firstName.sendKeys("asdasd");
 
 
     }
